@@ -1,0 +1,3 @@
+C:\mingw64\bin\cmake.exe -E rm -f CMakeFiles\QuanQuan.dir/objects.a
+D:\Qt\Tools\mingw1310_64\bin\ar.exe qc CMakeFiles\QuanQuan.dir/objects.a @CMakeFiles\QuanQuan.dir\objects1.rsp
+D:\Qt\Tools\mingw1310_64\bin\g++.exe -mwindows -Wl,--whole-archive CMakeFiles\QuanQuan.dir/objects.a -Wl,--no-whole-archive -o QuanQuan.exe -Wl,--out-implib,libQuanQuan.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\QuanQuan.dir\linkLibs.rsp
