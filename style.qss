@@ -1,0 +1,444 @@
+/* ==========================================================
+   QuanQuan (圈圈) 校园二手交易平台 - Apple MacOS / iOS 极简清新风格
+   ========================================================== */
+
+/* 全局基底样式 */
+QWidget {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-size: 13px;
+    color: #1D1D1F;
+    background-color: #F5F5F7;
+}
+
+/* 主窗口与对话框 */
+QMainWindow, QDialog {
+    background-color: #F5F5F7;
+    border: none;
+}
+
+/* 侧边导航栏面板 */
+QFrame#sidebarFrame {
+    background-color: #FFFFFF;
+    border-right: 1px solid #E5E5EA;
+}
+
+/* 侧边栏 Logo 标题 */
+QLabel#sidebarTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1D1D1F;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+/* 输入框、文本框、下拉选择框 */
+QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D6;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-height: 22px; /* 完美纵横比，高度稳定在 38px-40px */
+    font-size: 13px;
+    color: #1D1D1F;
+    selection-background-color: #007AFF;
+    selection-color: #FFFFFF;
+}
+
+QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus, QComboBox:focus, QSpinBox:focus, QDoubleSpinBox:focus {
+    border: 1px solid #007AFF;
+    background-color: #FFFFFF;
+}
+
+/* 下拉框项下拉样式 (弹出菜单) */
+QComboBox QAbstractItemView {
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D6;
+    border-radius: 0px;
+    outline: none;
+    padding: 0px; /* 去除留白，让高亮条目完全贴合边缘 */
+}
+
+QComboBox QAbstractItemView::item {
+    min-height: 32px;
+    padding: 0px 12px;
+    color: #1D1D1F;
+    border-radius: 0px; /* 去除圆角，变为贯穿左右的横条直角 */
+    margin: 0px; /* 移除间距，做到完美贴合 */
+}
+
+QComboBox QAbstractItemView::item:hover,
+QComboBox QAbstractItemView::item:selected {
+    background-color: #F2F2F7; /* 极淡的苹果灰 */
+    color: #007AFF;
+    font-weight: bold;
+}
+
+/* 去除原生丑陋的下拉/上下箭头边框 */
+QComboBox::drop-down, QDoubleSpinBox::up-button, QDoubleSpinBox::down-button, QSpinBox::up-button, QSpinBox::down-button {
+    border: none;
+    background: transparent;
+}
+
+/* 按钮 - 通用主按钮 */
+QPushButton {
+    background-color: #FFFFFF;
+    border: 1px solid #D1D1D6;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 500;
+    color: #1D1D1F;
+    min-height: 22px; /* 统一饱满比例 */
+}
+
+QPushButton:hover {
+    background-color: #F2F2F7;
+    border: 1px solid #C7C7CC;
+}
+
+QPushButton:pressed {
+    background-color: #E5E5EA;
+}
+
+/* 高亮主操作按钮 (Apple Blue) */
+QPushButton#btnSubmit, QPushButton:default {
+    background-color: #007AFF;
+    border: none;
+    color: #FFFFFF;
+}
+
+QPushButton#btnSubmit:hover, QPushButton:default:hover {
+    background-color: #006DE6;
+}
+
+QPushButton#btnSubmit:pressed, QPushButton:default:pressed {
+    background-color: #0056B3;
+}
+
+/* 危险/红色警示按钮 */
+QPushButton#dangerButton {
+    background-color: #FF3B30;
+    border: none;
+    color: #FFFFFF;
+}
+
+QPushButton#dangerButton:hover {
+    background-color: #E6352B;
+}
+
+QPushButton#dangerButton:pressed {
+    background-color: #CC2F26;
+}
+
+/* 导航侧边栏专有按钮样式 (自动匹配所有 sidebarFrame 下的按钮) */
+QFrame#sidebarFrame QPushButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #86868B;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    min-height: 20px;
+}
+
+QFrame#sidebarFrame QPushButton:hover {
+    background-color: #F2F2F7;
+    color: #1D1D1F;
+}
+
+QFrame#sidebarFrame QPushButton:checked {
+    background-color: #E5F1FF;
+    color: #007AFF;
+    font-weight: 600;
+}
+
+/* 退出登录特殊样式 */
+QFrame#sidebarFrame QPushButton#btnNavLogout {
+    color: #FF3B30;
+}
+
+QFrame#sidebarFrame QPushButton#btnNavLogout:hover {
+    background-color: #FFEAEA;
+    color: #FF3B30;
+}
+
+/* 表格控件 (QTableWidget / QTableView) */
+QTableView, QTableWidget {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5EA;
+    gridline-color: #E5E5EA;
+    border-radius: 10px;
+    outline: none;
+}
+
+QTableView::item, QTableWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #F2F2F7;
+}
+
+QTableView::item:selected, QTableWidget::item:selected {
+    background-color: #E5F1FF;
+    color: #007AFF;
+}
+
+/* 表头样式 */
+QHeaderView::section {
+    background-color: #F5F5F7;
+    color: #86868B;
+    padding: 8px;
+    font-weight: 600;
+    border: none;
+    border-bottom: 1px solid #E5E5EA;
+}
+
+/* 选项卡 (QTabWidget) */
+QTabWidget::pane {
+    border: 1px solid #E5E5EA;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+}
+
+QTabBar::tab {
+    background-color: #F5F5F7;
+    border: 1px solid #E5E5EA;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 8px 16px;
+    color: #86868B;
+}
+
+QTabBar::tab:hover {
+    background-color: #E5E5EA;
+    color: #1D1D1F;
+}
+
+QTabBar::tab:selected {
+    background-color: #FFFFFF;
+    color: #007AFF;
+    border-bottom: 2px solid #007AFF;
+    font-weight: 600;
+}
+
+/* 滚动条 (QScrollBar) */
+QScrollBar:vertical {
+    border: none;
+    background-color: transparent;
+    width: 10px;
+    margin: 0px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #C7C7CC;
+    min-height: 30px;
+    border-radius: 5px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #AEAEB2;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+QScrollBar:horizontal {
+    border: none;
+    background-color: transparent;
+    height: 10px;
+    margin: 0px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #C7C7CC;
+    min-width: 30px;
+    border-radius: 5px;
+}
+
+/* 卡片标题 */
+QLabel#cardTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1D1D1F;
+    background: transparent;
+}
+
+/* 卡片价格 */
+QLabel#cardPrice {
+    font-size: 18px;
+    font-weight: 600;
+    color: #FF9500;
+    background: transparent;
+}
+
+/* 状态标签 */
+QLabel#statusLabel {
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+QLabel#statusActive {
+    background-color: #E5F1FF;
+    color: #007AFF;
+}
+
+QLabel#statusSold {
+    background-color: #F2F2F7;
+    color: #86868B;
+}
+
+/* 列表展示中的卡片 */
+QListWidget {
+    background-color: #F5F5F7;
+    border: none;
+    outline: none;
+}
+
+QListWidget::item {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5EA;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    padding: 12px;
+}
+
+QListWidget::item:hover {
+    border: 1px solid #D1D1D6;
+    background-color: #FAFAFC;
+}
+
+QListWidget::item:selected {
+    border: 1px solid #007AFF;
+    background-color: #F5F5F7;
+    color: #1D1D1F;
+}
+
+/* 标签提示 */
+QLabel#tipLabel {
+    color: #86868B;
+    font-size: 13px;
+}
+
+QLabel#titleLabel {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1D1D1F;
+    margin-bottom: 10px;
+}
+
+/* 自定义卡片背景 */
+QWidget#goodsCard {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5EA;
+    border-radius: 14px;
+}
+
+QWidget#goodsCard:hover {
+    border: 1px solid #D1D1D6;
+    background-color: #FAFAFC;
+}
+
+/* 个人中心与钱包卡片样式 (Apple Light Theme Cards) */
+QFrame#frameProfile, QFrame#frameWallet, QFrame#frameStats {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5EA;
+    border-radius: 14px;
+}
+
+QFrame#frameProfile:hover, QFrame#frameWallet:hover, QFrame#frameStats:hover {
+    border: 1px solid #D1D1D6;
+}
+
+/* 卡片内部标签基础样式 */
+QFrame#frameProfile QLabel, QFrame#frameWallet QLabel, QFrame#frameStats QLabel {
+    color: #1D1D1F;
+    font-size: 13px;
+    background: transparent;
+    border: none;
+}
+
+/* 卡片分类大标题 */
+QLabel#label_11, QLabel#label_13, QLabel#label_15 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #007AFF; /* Apple System Blue */
+    padding-bottom: 5px;
+    border-bottom: 1px solid #F2F2F7;
+}
+
+/* 钱包大余额数值 */
+QLabel#lblBalanceValue {
+    font-size: 28px;
+    font-weight: 700;
+    color: #FF9500; /* Apple System Orange */
+    margin: 5px 0px;
+}
+
+/* 大数据统计项 */
+QLabel#lblTotalConsumption, QLabel#lblTotalListed, QLabel#lblStatsActiveGoods {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1D1D1F;
+    padding: 2px 0px;
+}
+
+/* ==========================================================
+   QMessageBox 提示框与对话框（Apple macOS/iOS 弹出卡片风格）
+   ========================================================== */
+QMessageBox {
+    background-color: #FFFFFF;
+}
+
+/* 提示框内的正文与标题文本 */
+QMessageBox QLabel {
+    font-size: 13px;
+    color: #1D1D1F;
+    background: transparent;
+    padding: 8px 16px;
+    min-height: 45px;
+}
+
+/* 提示框所有按钮通用样式 */
+QMessageBox QPushButton {
+    min-width: 80px;
+    min-height: 28px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 15px;
+    margin: 5px;
+}
+
+/* 默认确认/肯定按钮（如：确定、Yes，采用 Apple 经典蓝色高亮） */
+QMessageBox QPushButton:default {
+    background-color: #007AFF;
+    border: none;
+    color: #FFFFFF;
+}
+
+QMessageBox QPushButton:default:hover {
+    background-color: #006DE6;
+}
+
+QMessageBox QPushButton:default:pressed {
+    background-color: #0056B3;
+}
+
+/* 取消/否定按钮（如：取消、No，采用 Apple 经典浅灰色与蓝色文本） */
+QMessageBox QPushButton:!default {
+    background-color: #F2F2F7;
+    border: 1px solid #E5E5EA;
+    color: #007AFF; /* 苹果风格取消按钮文字为蓝色 */
+}
+
+QMessageBox QPushButton:!default:hover {
+    background-color: #E5E5EA;
+    border: 1px solid #D1D1D6;
+}
+
+QMessageBox QPushButton:!default:pressed {
+    background-color: #D1D1D6;
+}
