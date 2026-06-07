@@ -1,9 +1,0 @@
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/QuanQuan.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/edit_cache.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/rebuild_cache.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/list_install_components.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/install.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/install/local.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/install/strip.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/QuanQuan_autogen_timestamp_deps.dir
-E:/School/DataBaseE/QuanQuan/build/CMakeFiles/QuanQuan_autogen.dir
