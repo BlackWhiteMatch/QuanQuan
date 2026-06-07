@@ -2,15 +2,19 @@
 *.slo
 *.lo
 *.o
-*.a
-*.la
-*.lai
-*.so
-*.so.*
-*.dll
-*.dylib
+*.obj
+*.suo
+*.tlog
+*.ilk
+*.meta
+*.pch
+*.idb
+*.rep
+*.res
+*.sqlite
+*.db
 
-# Qt-es
+# Qt-specific
 object_script.*.Release
 object_script.*.Debug
 *_plugin_import.cpp
@@ -29,28 +33,32 @@ ui_*.h
 *.jsc
 Makefile*
 *build-*
-build/
 *.qm
 *.prl
-*.qmlls.ini
 
-# Qt unit tests
-target_wrapper.*
-
-# QtCreator
-*.autosave
-
-# QtCreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
-
-# QtCreator CMake
+# Qt Creator's CMake project files
 CMakeLists.txt.user*
 
-# QtCreator 4.8< compilation database
-compile_commands.json
+# Windows executables and libraries
+*.exe
+*.dll
+*.exp
+*.lib
+*.ilk
+*.pdb
 
-# QtCreator local machine specific files for imported projects
-*creator.user*
+# Build directories (matching common Qt Creator build folders)
+build/
+build-*/
+*-build-*/
+release/
+debug/
 
-*_qmlcache.qrc
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

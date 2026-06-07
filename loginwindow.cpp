@@ -10,9 +10,7 @@
 #include <QPainter>
 #include <QPainterPath>
 
-// ----------------------------------------------------
 // 数据库硬编码配置
-// ----------------------------------------------------
 const QString DB_HOST = "62.234.97.253";
 const int     DB_PORT = 3306;
 const QString DB_NAME = "quanquan_db";

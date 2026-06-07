@@ -135,17 +135,22 @@ double DbManager::getUserTotalConsumption(int userId)
     QSqlDatabase db = QSqlDatabase::database(m_connectionName);
     QSqlQuery query(db);
     
-    // 调用存储过程 CalculateUserTotalConsumption
-    query.prepare("CALL CalculateUserTotalConsumption(?, ?)");
-    query.bindValue(0, userId);
-    query.bindValue(1, 0.00, QSql::Out); // 绑定输出参数
+    // 修复 Qt MySQL 驱动 QSql::Out 绑定的 Bug，改用 MySQL 内部的会话变量 @out_val
+    query.prepare(QString("CALL CalculateUserTotalConsumption(%1, @out_val)").arg(userId));
 
     if (!query.exec()) {
         qWarning() << "Call stored procedure failed:" << query.lastError().text();
         return 0.00;
     }
     
-    return query.boundValue(1).toDouble();
+    // 读取会话变量的值
+    if (query.exec("SELECT @out_val")) {
+        if (query.next()) {
+            return query.value(0).toDouble();
+        }
+    }
+    
+    return 0.00;
 }
 
 int DbManager::getCategoryActiveGoodsCount(int categoryId)
