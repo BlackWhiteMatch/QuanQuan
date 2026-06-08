@@ -208,6 +208,8 @@ MainWindow::MainWindow(QWidget *parent)
     
     // 信号重载机制保证 Qt6 兼容性良好
     connect(ui->comboCategoryFilter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWindow::onCategoryFilterChanged);
+    connect(ui->editMinPrice, &QLineEdit::editingFinished, this, [this](){ loadMarket(); });
+    connect(ui->editMaxPrice, &QLineEdit::editingFinished, this, [this](){ loadMarket(); });
     connect(ui->editSearch, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     connect(ui->btnPublish, &QPushButton::clicked, this, &MainWindow::onPublishClicked);
     connect(ui->btnRecharge, &QPushButton::clicked, this, &MainWindow::onRechargeClicked);
@@ -348,6 +350,17 @@ void MainWindow::loadMarket()
     if (catFilter > 0) {
         sql += " AND g.category_id = ? ";
         params << catFilter;
+    }
+    
+    QString minPriceStr = ui->editMinPrice->text().trimmed();
+    QString maxPriceStr = ui->editMaxPrice->text().trimmed();
+    if (!minPriceStr.isEmpty()) {
+        sql += " AND g.price >= ? ";
+        params << minPriceStr.toDouble();
+    }
+    if (!maxPriceStr.isEmpty()) {
+        sql += " AND g.price <= ? ";
+        params << maxPriceStr.toDouble();
     }
     
     if (!searchText.isEmpty()) {
@@ -558,6 +571,10 @@ void MainWindow::loadOrders()
         
         rowS++;
     }
+    
+    // 动态更新选项卡标题，追加订单数量统计
+    ui->tabOrders->setTabText(0, QString("🛒 我买入的宝贝 (%1)").arg(rowB));
+    ui->tabOrders->setTabText(1, QString("💰 我售出的宝贝 (%1)").arg(rowS));
 }
 
 void MainWindow::loadProfile()
@@ -583,7 +600,12 @@ void MainWindow::loadProfile()
         ui->lblRoleVal->setText("🎫 账号身份:  " + roleStr);
         
         double balance = qUser.value("balance").toDouble();
-        ui->lblBalanceValue->setText(QString("￥%1").arg(QString::number(balance, 'f', 2)));
+        QString balanceText = QString("￥%1").arg(QString::number(balance, 'f', 2));
+        if (balance < 100.0) {
+            // 利用富文本特性，直接在原标签右侧追加红色警告字样，免去修改 .ui 布局的繁琐
+            balanceText += " <span style='color:#FF3B30; font-size:13px; font-weight:bold;'>(余额不足，请充值)</span>";
+        }
+        ui->lblBalanceValue->setText(balanceText);
         
         totalListed = qUser.value("listed_count").toInt();
     }

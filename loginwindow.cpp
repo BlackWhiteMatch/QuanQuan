@@ -9,7 +9,7 @@
 #include <QCryptographicHash>
 #include <QPainter>
 #include <QPainterPath>
-
+#include <QAction>
 // 数据库硬编码配置
 const QString DB_HOST = "62.234.97.253";
 const int     DB_PORT = 3306;
@@ -23,6 +23,27 @@ LoginWindow::LoginWindow(QWidget *parent)
     , m_isRegisterMode(false)
 {
     ui->setupUi(this);
+    
+    // 密码框小眼睛切换功能 (同时适用于登录和注册)
+    QAction *eyeAction = ui->editPassword->addAction(QIcon(), QLineEdit::TrailingPosition);
+    auto updateEyeIcon = [this, eyeAction]() {
+        QPixmap pixmap(24, 24);
+        pixmap.fill(Qt::transparent);
+        QPainter painter(&pixmap);
+        QFont f = painter.font();
+        f.setPointSize(10);
+        painter.setFont(f);
+        QString emoji = (ui->editPassword->echoMode() == QLineEdit::Password) ? "🙈" : "👁️";
+        painter.drawText(pixmap.rect(), Qt::AlignCenter, emoji);
+        eyeAction->setIcon(QIcon(pixmap));
+    };
+    updateEyeIcon();
+    connect(eyeAction, &QAction::triggered, this, [this, updateEyeIcon]() {
+        ui->editPassword->setEchoMode(
+            ui->editPassword->echoMode() == QLineEdit::Password ? QLineEdit::Normal : QLineEdit::Password
+        );
+        updateEyeIcon();
+    });
     
     // 生成圆角 Logo
     QPixmap src(":/quanquan.png");

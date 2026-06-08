@@ -267,6 +267,39 @@
            </widget>
           </item>
           <item>
+           <widget class="QLineEdit" name="editMinPrice">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="placeholderText">
+             <string>最低价</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelPriceDash">
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="editMaxPrice">
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="placeholderText">
+             <string>最高价</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="btnRefreshMarket">
             <property name="text">
              <string>刷新</string>
